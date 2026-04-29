@@ -1,21 +1,32 @@
-# DevOps CLI Text Processing Cheat Sheet
+<p align="center">
+  <img src="assets/banner.png" alt="DevOps CLI Text Processing Cheat Sheet Banner" width="100%">
+</p>
 
-> Production-grade CLI text processing reference for DevOps Engineers, SREs, Kubernetes Operators, Linux Sysadmins, and Platform Engineers.
+<h1 align="center">DevOps CLI Text Processing Cheat Sheet</h1>
 
-This repository is a practical, enterprise-friendly cheat sheet for daily operations, troubleshooting, Kubernetes workflows, Helm values management, CI/CD scripting, log analysis, and safe text processing on Linux systems.
+<p align="center">
+  Production-grade CLI text processing reference for DevOps, SRE, Linux, Kubernetes, Helm, CI/CD, and automation workflows.
+</p>
 
-It focuses on tools that every DevOps engineer should know:
+<p align="center">
+  <strong>grep</strong> •
+  <strong>rg</strong> •
+  <strong>jq</strong> •
+  <strong>yq</strong> •
+  <strong>sed</strong> •
+  <strong>awk</strong> •
+  <strong>fzf</strong> •
+  <strong>perl</strong> •
+  <strong>regex</strong>
+</p>
 
-- `grep`
-- `ripgrep` / `rg`
-- `jq`
-- `yq`
-- `fzf`
-- `sed`
-- `awk`
-- `perl`
-- advanced regex
-- Vim survival commands
+---
+
+## Overview
+
+This repository is a practical, enterprise-friendly cheat sheet for daily DevOps operations, troubleshooting, Kubernetes workflows, Helm values management, CI/CD scripting, log analysis, and safe text processing on Linux systems.
+
+It is designed to be useful for both learning and real production work. The goal is not to memorize every command. The goal is to build safe, reusable, and reliable command-line workflows.
 
 ---
 
@@ -71,6 +82,8 @@ Designed for:
 ```text
 devops-cli-text-processing-cheat-sheet/
 ├── README.md
+├── assets/
+│   └── banner.png
 ├── cheatsheets/
 │   ├── grep-rg.md
 │   ├── jq-yq.md
@@ -363,6 +376,14 @@ grep -rl "prometheus" .
 
 ```bash
 grep -r "password" . --exclude-dir=.git
+```
+
+---
+
+## Search Multiple Patterns
+
+```bash
+grep -E "error|failed|timeout" app.log
 ```
 
 ---
@@ -1200,7 +1221,158 @@ kubectl -n "$ns" logs -f "$pod"
 
 ---
 
-# 15. Vim Survival Guide for DevOps
+# 15. Helm Values Operations
+
+## Read Image Repository
+
+```bash
+yq -r '.image.repository' values.yaml
+```
+
+---
+
+## Read Image Tag
+
+```bash
+yq -r '.image.tag' values.yaml
+```
+
+---
+
+## Update Image Tag
+
+```bash
+cp values.yaml values.yaml.bak
+yq -i '.image.tag = "1.2.3"' values.yaml
+diff -u values.yaml.bak values.yaml
+```
+
+---
+
+## Update Resource Requests
+
+```bash
+yq -i '.resources.requests.cpu = "250m"' values.yaml
+yq -i '.resources.requests.memory = "256Mi"' values.yaml
+```
+
+---
+
+## Update Resource Limits
+
+```bash
+yq -i '.resources.limits.cpu = "500m"' values.yaml
+yq -i '.resources.limits.memory = "512Mi"' values.yaml
+```
+
+---
+
+## Validate Rendered Manifest
+
+```bash
+helm template app ./chart -f values.yaml > /tmp/app-rendered.yaml
+yq '.' /tmp/app-rendered.yaml >/dev/null
+```
+
+---
+
+# 16. Log Investigation Workflows
+
+## Search for Errors
+
+```bash
+rg -i "error|failed|timeout|exception" app.log
+```
+
+---
+
+## Count Error Lines
+
+```bash
+rg -i "error" app.log | wc -l
+```
+
+---
+
+## Show Context Around Match
+
+```bash
+grep -i -C 3 "timeout" app.log
+```
+
+---
+
+## Extract IP Addresses from Logs
+
+```bash
+rg -o '\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b' app.log | sort -u
+```
+
+---
+
+## Top Repeated IP Addresses
+
+```bash
+rg -o '\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b' app.log |
+sort |
+uniq -c |
+sort -nr |
+head
+```
+
+---
+
+# 17. CI/CD Useful Patterns
+
+## Extract Docker Image from YAML
+
+```bash
+yq -r '.spec.template.spec.containers[0].image' deployment.yaml
+```
+
+---
+
+## Validate JSON File
+
+```bash
+jq . config.json >/dev/null
+```
+
+---
+
+## Validate YAML File
+
+```bash
+yq . values.yaml >/dev/null
+```
+
+---
+
+## Find Dockerfiles in Repository
+
+```bash
+find . -name Dockerfile -type f
+```
+
+---
+
+## Search CI/CD Variables
+
+```bash
+rg "NEXUS|REGISTRY|IMAGE|DEPLOY|TOKEN|PASSWORD" .gitlab-ci.yml
+```
+
+---
+
+## Search Hardcoded Secrets Carefully
+
+```bash
+rg -i "password|secret|token|apikey|api_key" --hidden -g '!.git'
+```
+
+---
+
+# 18. Vim Survival Guide for DevOps
 
 ## Open File
 
@@ -1286,7 +1458,7 @@ N
 
 ---
 
-# 16. Useful Aliases
+# 19. Useful Aliases
 
 Add to `~/.bashrc` or `~/.zshrc`:
 
@@ -1315,7 +1487,7 @@ source ~/.zshrc
 
 ---
 
-# 17. Recommended Learning Path
+# 20. Recommended Learning Path
 
 ## Beginner
 
@@ -1375,7 +1547,7 @@ Build reliable, repeatable, production-safe operational workflows.
 
 ---
 
-# 18. Enterprise DevOps Mindset
+# 21. Enterprise DevOps Mindset
 
 The goal is not to memorize every command.
 
@@ -1394,7 +1566,7 @@ A strong DevOps Engineer:
 
 ---
 
-# 19. Recommended Daily Stack
+# 22. Recommended Daily Stack
 
 ## Core Tools
 
@@ -1424,7 +1596,7 @@ complex jq/yq expressions
 
 ---
 
-# 20. Suggested Next Topics
+# 23. Suggested Next Topics
 
 After mastering this cheat sheet, continue with:
 
@@ -1442,7 +1614,7 @@ After mastering this cheat sheet, continue with:
 
 ---
 
-# 21. Example Script: validate-tools.sh
+# 24. Example Script: validate-tools.sh
 
 Create:
 
@@ -1507,7 +1679,7 @@ bash scripts/validate-tools.sh
 
 ---
 
-# 22. Example Script: install-tools-rocky.sh
+# 25. Example Script: install-tools-rocky.sh
 
 Create:
 
@@ -1548,7 +1720,7 @@ chmod +x scripts/install-tools-rocky.sh
 
 ---
 
-# 23. Example Script: install-tools-ubuntu.sh
+# 26. Example Script: install-tools-ubuntu.sh
 
 Create:
 
@@ -1591,13 +1763,13 @@ chmod +x scripts/install-tools-ubuntu.sh
 
 ---
 
-# 24. Git Workflow
+# 27. Git Workflow
 
 Initialize repository:
 
 ```bash
 git init
-git add README.md scripts/
+git add README.md assets/ scripts/
 git commit -m "docs: add production-grade DevOps text processing cheat sheet"
 ```
 
@@ -1616,7 +1788,7 @@ git push -u origin main
 
 ---
 
-# 25. Suggested GitHub Repository Description
+# 28. Suggested GitHub Repository Description
 
 ```text
 Production-grade CLI text processing cheat sheet for DevOps, SRE, Linux, Kubernetes, Helm, jq, yq, grep, rg, sed, awk, perl, fzf, and regex workflows.
