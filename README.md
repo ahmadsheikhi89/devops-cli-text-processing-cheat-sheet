@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/ahmadsheikhi89/devops-cli-text-processing-cheat-sheet/main/assets/banner.png"
+  <img src="https://raw.githubusercontent.com/ahmadsheikhi89/devops-cli-text-processing-cheat-sheet/main/banner.png"
        alt="DevOps CLI Text Processing Cheat Sheet Banner"
        width="100%" />
 </p>
