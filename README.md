@@ -1,5 +1,7 @@
 <p align="center">
-  <img src="assets/banner.png" alt="DevOps CLI Text Processing Cheat Sheet Banner" width="100%">
+  <img src="https://raw.githubusercontent.com/ahmadsheikhi89/devops-cli-text-processing-cheat-sheet/main/assets/banner.png"
+       alt="DevOps CLI Text Processing Cheat Sheet Banner"
+       width="100%" />
 </p>
 
 <h1 align="center">DevOps CLI Text Processing Cheat Sheet</h1>
@@ -26,7 +28,11 @@
 
 This repository is a practical, enterprise-friendly cheat sheet for daily DevOps operations, troubleshooting, Kubernetes workflows, Helm values management, CI/CD scripting, log analysis, and safe text processing on Linux systems.
 
-It is designed to be useful for both learning and real production work. The goal is not to memorize every command. The goal is to build safe, reusable, and reliable command-line workflows.
+It is designed to be useful for both learning and real production work.
+
+The goal is not to memorize every command.
+
+The goal is to build safe, reusable, and reliable command-line workflows.
 
 ---
 
@@ -109,7 +115,7 @@ devops-cli-text-processing-cheat-sheet/
 Clone the repository:
 
 ```bash
-git clone https://github.com/YOUR_ORG/devops-cli-text-processing-cheat-sheet.git
+git clone https://github.com/ahmadsheikhi89/devops-cli-text-processing-cheat-sheet.git
 cd devops-cli-text-processing-cheat-sheet
 ```
 
@@ -388,6 +394,14 @@ grep -E "error|failed|timeout" app.log
 
 ---
 
+## Show Lines Before and After Match
+
+```bash
+grep -C 3 "timeout" app.log
+```
+
+---
+
 ## Kubernetes Example
 
 ```bash
@@ -440,6 +454,14 @@ rg -i "error"
 
 ```bash
 rg -l "grafana"
+```
+
+---
+
+## Show Line Numbers
+
+```bash
+rg -n "timeout" app.log
 ```
 
 ---
@@ -1776,7 +1798,7 @@ git commit -m "docs: add production-grade DevOps text processing cheat sheet"
 Add remote:
 
 ```bash
-git remote add origin https://github.com/YOUR_ORG/devops-cli-text-processing-cheat-sheet.git
+git remote add origin https://github.com/ahmadsheikhi89/devops-cli-text-processing-cheat-sheet.git
 ```
 
 Push:
