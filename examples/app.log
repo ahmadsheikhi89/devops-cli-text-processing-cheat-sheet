@@ -1,0 +1,6 @@
+2026-04-29T10:10:01Z INFO  service=payment message="request accepted" client_ip=10.10.20.15
+2026-04-29T10:10:05Z WARN  service=payment message="upstream timeout" client_ip=10.10.20.16
+2026-04-29T10:10:09Z ERROR service=payment message="database connection failed" client_ip=10.10.20.17
+2026-04-29T10:11:02Z INFO  service=auth message="token issued" user=ops@example.com client_ip=10.10.20.18
+2026-04-29T10:11:40Z ERROR service=api message="request failed with timeout" client_ip=10.10.20.16
+2026-04-29T10:12:01Z DEBUG service=api message="debug payload ignored" client_ip=10.10.20.19
