@@ -1824,3 +1824,10 @@ Production-grade CLI text processing cheat sheet for DevOps, SRE, Linux, Kuberne
 Do not just run commands.
 Understand the input, transform it safely, validate the output, then apply the change.
 ```
+
+## 👤 Author
+
+**Ahmad Sheikhi**  
+Senior DevOps Engineer
+
+
